@@ -61,6 +61,7 @@ Object::Object()
   }
 
   angle = 0.0f;
+  orbitAngle = 0.0f;
 
   glGenBuffers(1, &VB);
   glBindBuffer(GL_ARRAY_BUFFER, VB);
@@ -79,8 +80,16 @@ Object::~Object()
 
 void Object::Update(unsigned int dt)
 {
+  // Defined new variables rotation, translate, and rotationAxis
   angle += dt * M_PI/1000;
-  model = glm::rotate(glm::mat4(1.0f), (angle), glm::vec3(0.0, 1.0, 0.0));
+  orbitAngle -= dt * M_PI/8500;
+  rotation = glm::mat4(1.0f);
+  translate = glm::mat4(1.0f);
+  rotationAxis = glm::vec3(0.0, 1.0, 0.0);
+    
+  // The cube will rotate at delta time speed on the y axis while spinning at delta time
+  // and translating it's position by a 2 float offset from the origin axis
+  model = (glm::rotate(rotation, (angle), rotationAxis)) * (glm::translate(translate, glm::vec3(2.0f * cos(orbitAngle), 0.0f, 2.0f * sin(orbitAngle))));
 }
 
 glm::mat4 Object::GetModel()

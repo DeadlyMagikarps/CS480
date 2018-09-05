@@ -16,11 +16,15 @@ class Object
 
   private:
     glm::mat4 model;
+    glm::mat4 rotation;
+    glm::vec3 rotationAxis;
+    glm::mat4 translate;
     std::vector<Vertex> Vertices;
     std::vector<unsigned int> Indices;
     GLuint VB;
     GLuint IB;
 
+    float orbitAngle;
     float angle;
 };
 
