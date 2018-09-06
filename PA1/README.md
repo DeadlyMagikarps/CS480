@@ -54,3 +54,12 @@ OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) web
 ```bash
 /usr/NX/scripts/vgl/vglrun ./Tutorial
 ```
+
+### Running Program with Command Line Arguments
+This program as of now will seg fault if you give it no command line arguments.
+
+To run this program, provide the location of the shaders of -v and -f
+
+Example: ./Tutorial -v shaders/myVertexShader.glsl -f shaders/myFragmentShader.glsl
+
+This will be more robust in the future to handle errors.

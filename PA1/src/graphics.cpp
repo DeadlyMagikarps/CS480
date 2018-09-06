@@ -10,7 +10,7 @@ Graphics::~Graphics()
 
 }
 
-bool Graphics::Initialize(int width, int height)
+bool Graphics::Initialize(int width, int height, const std::vector<pair<GLenum, std::string>>& shaderInfo)
 {
   // Used for the linux OS
   #if !defined(__APPLE__) && !defined(MACOSX)
@@ -36,6 +36,8 @@ bool Graphics::Initialize(int width, int height)
   glGenVertexArrays(1, &vao);
   glBindVertexArray(vao);
 
+  int index;
+    
   // Init Camera
   m_camera = new Camera();
   if(!m_camera->Initialize(width, height))
@@ -55,19 +57,24 @@ bool Graphics::Initialize(int width, int height)
     return false;
   }
 
-  // Add the vertex shader
-  if(!m_shader->AddShader(GL_VERTEX_SHADER))
-  {
-    printf("Vertex Shader failed to Initialize\n");
-    return false;
-  }
-
-  // Add the fragment shader
-  if(!m_shader->AddShader(GL_FRAGMENT_SHADER))
-  {
-    printf("Fragment Shader failed to Initialize\n");
-    return false;
-  }
+  // Add the two shaders
+    for(index = 0; index < shaderInfo.size(); index++)
+    {
+        if(!m_shader->AddShader(shaderInfo[index].first, shaderInfo[index].second))
+        {
+            if(shaderInfo[index].first == GL_VERTEX_SHADER)
+            {
+                printf("Vertex Shader failed to Initialize\n");
+            }
+            
+            else
+            {
+                printf("Fragment Shader failed to Initialize\n");
+            }
+            
+            return false;
+        }
+    }
 
   // Connect the program
   if(!m_shader->Finalize())
