@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "graphics_headers.h"
+#include "SDL.h"
 
 class Object
 {
@@ -11,6 +12,14 @@ class Object
     ~Object();
     void Update(unsigned int dt);
     void Render();
+    
+    // PA2 Keyboard Functionality
+    void ToggleLeftRotation();
+    void ToggleRightRotation();
+    void TogglePauseAll();
+    float GetOrbitSpeed();
+    float GetRotationSpeed();
+    
 
     glm::mat4 GetModel();
 
@@ -26,6 +35,10 @@ class Object
 
     float orbitAngle;
     float angle;
+    float rotationSpeed;
+    float orbitSpeed;
+    float rotationSpeedMultiplier;
+    float orbitSpeedMultiplier;
 };
 
 #endif /* OBJECT_H */

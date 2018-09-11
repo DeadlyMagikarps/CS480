@@ -18,6 +18,11 @@ class Graphics
     bool Initialize(int width, int height, const std::vector<pair<GLenum, std::string>>& shaderInfo);
     void Update(unsigned int dt);
     void Render();
+    
+    // PA2 Keyboard Input Funtionality
+    void ToggleLeftRotation();
+    void ToggleRightRotation();
+    void TogglePauseAll();
 
   private:
     std::string ErrorString(GLenum error);
