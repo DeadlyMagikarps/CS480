@@ -60,7 +60,10 @@ This program as of now will seg fault if you give it no command line arguments.
 
 To run this program, provide the location of the shaders of -v and -f
 
-Usage: ./Tutorial -v shaders/cubeVertexShader.glsl -f shaders/cubeFragmentShader.glsl
+Usage
+```bash
+./Tutorial -v shaders/cubeVertexShader.glsl -f shaders/cubeFragmentShader.glsl
+```
 
 ### Keyboard Usage
 Pause Rotations - Space Bar
