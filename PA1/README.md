@@ -64,8 +64,3 @@ Usage
 ```bash
 ./Tutorial -v shaders/cubeVertexShader.glsl -f shaders/cubeFragmentShader.glsl
 ```
-
-### Keyboard Usage
-Pause Rotations - Space Bar
-Toggle Rotation Left - Left Direction Key or a
-Toggle Rotation Right - Right Direction Key or d
