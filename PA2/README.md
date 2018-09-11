@@ -66,6 +66,12 @@ Usage
 ```
 
 ### Keyboard Usage
-Pause Rotations - Space Bar
-Toggle Rotation Left - Left Direction Key or a
-Toggle Rotation Right - Right Direction Key or d
+Pause All Rotation and Orbits - Space Bar.
+
+Toggle Rotation Direction - r.
+Toggle Orbit Direction - o.
+
+Toggle Pause Rotation - w.
+Toggle Pause Orbit - s.
+
+Quit Program - Escape Key.
