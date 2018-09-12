@@ -64,6 +64,10 @@ Usage
 ```bash
 ./Tutorial -v shaders/cubeVertexShader.glsl -f shaders/cubeFragmentShader.glsl
 ```
+### Overall Controls
+Controls for this program will be using the SDL Library with Keyboard and Mouse.
+See usage as described below.
+
 
 ### Keyboard Usage
 Pause All Rotation and Orbits - Space Bar.
@@ -75,3 +79,13 @@ Toggle Pause Rotation - w.
 Toggle Pause Orbit - s.
 
 Quit Program - Escape Key.
+
+### Mouse Usage
+Pause All Rotation and Orbits - Middle Mouse Button (MMB).
+
+Toggle Rotation Direction - Right Mouse Button (RMB).
+Toggle Orbit Direction - Left Mouse Button (LMB).
+
+#### For usage with mouses that has more than 3 Buttons
+Toggle Pause Rotation - X1 Mouse Button
+Toggle Pause Orbit - X2 Mouse Button
