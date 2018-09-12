@@ -146,30 +146,6 @@ void Graphics::Render()
     }
 }
 
-void Graphics::ToggleLeftRotation()
-{
-    if(m_cube != NULL)
-    {
-        m_cube->ToggleLeftRotation();
-    }
-}
-
-void Graphics::ToggleRightRotation()
-{
-    if(m_cube != NULL)
-    {
-        m_cube->ToggleRightRotation();
-    }
-}
-
-void Graphics::TogglePauseAll()
-{
-    if(m_cube != NULL)
-    {
-        m_cube->TogglePauseAll();
-    }
-}
-
 std::string Graphics::ErrorString(GLenum error)
 {
     if(error == GL_INVALID_ENUM)
@@ -199,6 +175,46 @@ std::string Graphics::ErrorString(GLenum error)
     else
     {
         return "None";
+    }
+}
+
+void Graphics::ToggleRotationDirection()
+{
+    if(m_cube != NULL)
+    {
+        m_cube->ToggleRotationDirection();
+    }
+}
+
+void Graphics::ToggleOrbitDirection()
+{
+    if(m_cube != NULL)
+    {
+        m_cube->ToggleOrbitDirection();
+    }
+}
+
+void Graphics::TogglePauseRotation()
+{
+    if(m_cube != NULL)
+    {
+        m_cube->TogglePauseRotation();
+    }
+}
+
+void Graphics::TogglePauseOrbit()
+{
+    if(m_cube != NULL)
+    {
+        m_cube->TogglePauseOrbit();
+    }
+}
+
+void Graphics::TogglePauseAll()
+{
+    if(m_cube != NULL)
+    {
+        m_cube->TogglePauseAll();
     }
 }
 
