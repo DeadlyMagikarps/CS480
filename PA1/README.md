@@ -60,6 +60,7 @@ This program as of now will seg fault if you give it no command line arguments.
 
 To run this program, provide the location of the shaders of -v and -f
 
-Example: ./Tutorial -v shaders/myVertexShader.glsl -f shaders/myFragmentShader.glsl
-
-This will be more robust in the future to handle errors.
+Usage
+```bash
+./Tutorial -v shaders/cubeVertexShader.glsl -f shaders/cubeFragmentShader.glsl
+```

@@ -56,10 +56,40 @@ OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) web
 ```
 
 ### Running Program with Command Line Arguments
-This program as of now will seg fault if you give it no command line arguments.
 
 To run this program, provide the location of the shaders of -v and -f
 
-Example: ./Tutorial -v shaders/myVertexShader.glsl -f shaders/myFragmentShader.glsl
+-v Specifies file path for the Vertex Shader.  
+-f Specifies file path for the Fragment Shader.
 
-This will be more robust in the future to handle errors.
+Failure to provide both file paths will result in program termination.
+
+Usage
+```bash
+./Tutorial -v shaders/cubeVertexShader.glsl -f shaders/cubeFragmentShader.glsl
+```
+### Overall Controls
+Controls for this program will be using the SDL Library with Keyboard and Mouse.
+See usage as described below.
+
+
+### Keyboard Usage
+* Pause All Rotation and Orbits - Space Bar.
+
+* Toggle Rotation Direction - r.
+* Toggle Orbit Direction - o.
+
+* Toggle Pause Rotation - w.
+* Toggle Pause Orbit - s.
+
+* Quit Program - Escape Key.
+
+### Mouse Usage
+* Pause All Rotation and Orbits - Middle Mouse Button (MMB).
+
+* Toggle Rotation Direction - Right Mouse Button (RMB).
+* Toggle Orbit Direction - Left Mouse Button (LMB).
+
+#### For usage with mouses that has more than 3 Buttons
+* Toggle Pause Rotation - X1 Mouse Button
+* Toggle Pause Orbit - X2 Mouse Button
