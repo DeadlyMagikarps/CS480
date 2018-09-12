@@ -6,6 +6,10 @@
 
 #include "window.h"
 #include "graphics.h"
+#include "imgui.h"
+#include "imgui_impl_sdl.h"
+//#include "imgui_impl_opengl3.h"
+#include <SDL.h>
 
 class Engine
 {

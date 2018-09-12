@@ -3,6 +3,9 @@
 
 #include <SDL2/SDL.h>
 #include <string>
+#include "imgui.h"
+#include "imgui_impl_sdl.h"
+
 using namespace std;
 
 class Window
@@ -12,6 +15,7 @@ class Window
     ~Window();
     bool Initialize(const string &name, int* width, int* height);
     void Swap();
+    void InitImGui();
 
   private:
     SDL_Window* gWindow;

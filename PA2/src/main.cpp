@@ -15,7 +15,7 @@ bool CheckCommandLineParamaters(int argumentCount, char **argumentVector, vector
 int main(int argc, char **argv)
 {
   // Start an engine and run it then cleanup after
-  Engine *engine = new Engine("Shader Loader and Rotate around Y Axis", 800, 600);
+  Engine *engine = new Engine("Menu, Keyboard, and Mouse Interaction", 800, 600);
   vector<pair<GLenum, string>> shaderVector;
     
   if(!CheckCommandLineParamaters(argc, argv, shaderVector))
