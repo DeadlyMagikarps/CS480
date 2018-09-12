@@ -56,9 +56,13 @@ OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) web
 ```
 
 ### Running Program with Command Line Arguments
-This program as of now will seg fault if you give it no command line arguments.
 
 To run this program, provide the location of the shaders of -v and -f
+
+-v Specifies file path for the Vertex Shader.
+-f Specifies file path for the Fragment Shader.
+
+Failure to provide both file paths will result in program termination.
 
 Usage
 ```bash
