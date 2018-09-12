@@ -63,6 +63,7 @@ void Engine::Run()
         while(SDL_PollEvent(&m_event) != 0)
         {
             Keyboard();
+            Mouse();
         }
         
         // Update and render the graphics
@@ -131,6 +132,52 @@ void Engine::Keyboard()
             if(m_graphics != NULL)
             {
                 m_graphics->TogglePauseAll();
+            }
+        }
+    }
+}
+
+void Engine::Mouse()
+{
+    if(m_event.type == SDL_MOUSEBUTTONDOWN)
+    {
+        if(SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT))
+        {
+            if(m_graphics != NULL)
+            {
+                m_graphics->ToggleOrbitDirection();
+            }
+        }
+        
+        else if(SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_RIGHT))
+        {
+            if(m_graphics != NULL)
+            {
+                m_graphics->ToggleRotationDirection();
+            }
+        }
+        
+        else if(SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_MIDDLE))
+        {
+            if(m_graphics != NULL)
+            {
+                m_graphics->TogglePauseAll();
+            }
+        }
+        
+        else if(SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_X1))
+        {
+            if(m_graphics != NULL)
+            {
+                m_graphics->TogglePauseRotation();
+            }
+        }
+        
+        else if(SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_X2))
+        {
+            if(m_graphics != NULL)
+            {
+                m_graphics->TogglePauseOrbit();
             }
         }
     }

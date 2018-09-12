@@ -16,6 +16,7 @@ class Engine
     bool Initialize(const vector<pair<GLenum, string>> &shaderVector);
     void Run();
     void Keyboard();
+    void Mouse();
     unsigned int getDT();
     long long GetCurrentTimeMillis();
   
