@@ -70,22 +70,22 @@ See usage as described below.
 
 
 ### Keyboard Usage
-Pause All Rotation and Orbits - Space Bar.
+* Pause All Rotation and Orbits - Space Bar.
 
-Toggle Rotation Direction - r.
-Toggle Orbit Direction - o.
+* Toggle Rotation Direction - r.
+* Toggle Orbit Direction - o.
 
-Toggle Pause Rotation - w.
-Toggle Pause Orbit - s.
+* Toggle Pause Rotation - w.
+* Toggle Pause Orbit - s.
 
-Quit Program - Escape Key.
+* Quit Program - Escape Key.
 
 ### Mouse Usage
-Pause All Rotation and Orbits - Middle Mouse Button (MMB).
+* Pause All Rotation and Orbits - Middle Mouse Button (MMB).
 
-Toggle Rotation Direction - Right Mouse Button (RMB).
-Toggle Orbit Direction - Left Mouse Button (LMB).
+* Toggle Rotation Direction - Right Mouse Button (RMB).
+* Toggle Orbit Direction - Left Mouse Button (LMB).
 
 #### For usage with mouses that has more than 3 Buttons
-Toggle Pause Rotation - X1 Mouse Button
-Toggle Pause Orbit - X2 Mouse Button
+* Toggle Pause Rotation - X1 Mouse Button
+* Toggle Pause Orbit - X2 Mouse Button
