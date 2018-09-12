@@ -88,27 +88,43 @@ void Engine::Keyboard()
             m_running = false;
         }
         
-        // Rotate Left
-        else if(m_event.key.keysym.sym == SDLK_LEFT
-                || m_event.key.keysym.sym == SDLK_a)
+        // Toggle Rotation Direction
+        else if(m_event.key.keysym.sym == SDLK_r)
         {
             if(m_graphics != NULL)
             {
-                m_graphics->ToggleLeftRotation();
+                m_graphics->ToggleRotationDirection();
             }
         }
         
-        // Rotate Right
-        else if(m_event.key.keysym.sym == SDLK_RIGHT
-                || m_event.key.keysym.sym == SDLK_d)
+        // Toggle Orbit Direction
+        else if(m_event.key.keysym.sym == SDLK_o)
         {
             if(m_graphics != NULL)
             {
-                m_graphics->ToggleRightRotation();
+                m_graphics->ToggleOrbitDirection();
             }
         }
         
         // Pause Rotation
+        else if(m_event.key.keysym.sym == SDLK_w)
+        {
+            if(m_graphics != NULL)
+            {
+                m_graphics->TogglePauseRotation();
+            }
+        }
+        
+        // Pause Orbit
+        else if(m_event.key.keysym.sym == SDLK_s)
+        {
+            if(m_graphics != NULL)
+            {
+                m_graphics->TogglePauseOrbit();
+            }
+        }
+        
+        // Pause All
         else if(m_event.key.keysym.sym == SDLK_SPACE ||
                 m_event.key.keysym.sym == SDLK_p)
         {

@@ -92,12 +92,15 @@ void Object::Update(unsigned int dt)
     rotationAxis = glm::vec3(0.0, 1.0, 0.0);
     
     // The cube will rotate at delta time speed on the y axis while spinning at delta time
-    // and translating it's position by a 2 float offset from the origin axis
-    model = (glm::rotate(rotation, (angle), rotationAxis)) * (glm::translate(translate, glm::vec3(7.0f * cos(orbitAngle), 0.0f, 7.0f * sin(orbitAngle))));
+    // and translating it's position by a 7 float offset from the origin axis
+    model = glm::translate(translate,
+                           glm::vec3(7.0f * cos(orbitAngle), 0.0f,
+                                                7.0f * sin(orbitAngle)))
+                           * glm::rotate(rotation, (angle), rotationAxis);
     
 }
 
-void Object::ToggleLeftRotation()
+void Object::ToggleRotationDirection()
 {
     if(rotationSpeedMultiplier == 0.0)
     {
@@ -107,19 +110,55 @@ void Object::ToggleLeftRotation()
     rotationSpeed *= -1.0;
 }
 
-void Object::ToggleRightRotation()
+void Object::ToggleOrbitDirection()
+{
+    if(orbitSpeedMultiplier == 0.0)
+    {
+        orbitSpeedMultiplier = -1.0;
+    }
+    
+    orbitSpeed *= -1.0;
+}
+
+void Object::TogglePauseRotation()
 {
     if(rotationSpeedMultiplier == 0.0)
     {
         rotationSpeedMultiplier = 1.0;
     }
     
-    rotationSpeed *= 1.0;
+    else
+    {
+        rotationSpeedMultiplier = 0.0;
+    }
+}
+
+void Object::TogglePauseOrbit()
+{
+    if(orbitSpeedMultiplier == 0.0)
+    {
+        orbitSpeedMultiplier = -1.0;
+    }
+    
+    else
+    {
+        orbitSpeedMultiplier = 0.0;
+    }
 }
 
 void Object::TogglePauseAll()
 {
-    rotationSpeed = 0.0f;
+    if((rotationSpeedMultiplier == 0.0) && (orbitSpeedMultiplier == 0.0))
+    {
+        rotationSpeedMultiplier = 1.0;
+        orbitSpeedMultiplier = 1.0;
+    }
+    
+    else
+    {
+        rotationSpeedMultiplier = 0.0;
+        orbitSpeedMultiplier = 0.0;
+    }
 }
 
 float Object::GetOrbitSpeed()

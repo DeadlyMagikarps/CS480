@@ -20,8 +20,10 @@ class Graphics
     void Render();
     
     // PA2 Keyboard Input Funtionality
-    void ToggleLeftRotation();
-    void ToggleRightRotation();
+    void ToggleRotationDirection();
+    void ToggleOrbitDirection();
+    void TogglePauseRotation();
+    void TogglePauseOrbit();
     void TogglePauseAll();
 
   private:
