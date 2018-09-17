@@ -72,25 +72,23 @@ Usage
 Controls for this program will be using the SDL Library with Keyboard and Mouse.
 See usage as described below.
 
+## Keyboard Usage
 
-### Keyboard Usage
+### Universal Usage
 * Pause All Rotation and Orbits - Space Bar
+* Quit Program - Escape Key
 
-Toggling Parent Objects Transformations
+#### Toggling Parent Objects Transformations
 * Toggle Rotation Direction - a
 * Toggle Orbit Direction - d
-
 * Toggle Pause Rotation - w
 * Toggle Pause Orbit - s
 
-Toggling Child Objects Transformations
+#### Toggling Child Objects Transformations
 * Toggle Rotation Direction - j
 * Toggle Orbit Direction - l
-
 * Toggle Pause Rotation - i
 * Toggle Pause Orbit - k
-
-* Quit Program - Escape Key
 
 ### Mouse Usage
 * Pause All Rotation and Orbits - Middle Mouse Button (MMB).
