@@ -46,8 +46,23 @@ bool Graphics::Initialize(int width, int height, const std::vector<pair<GLenum, 
         return false;
     }
     
-    // Create the object
-    m_cube = new Object();
+    // Create the object (2 for this one)
+    objects.push_back(Object());
+    objects.push_back(Object());
+    
+    // Initialize default speeds of these objects
+    objects[0].UpdateOrbitSpeed(0.4f);
+    objects[0].UpdateRotationSpeed(1.0f);
+    objects[0].SetOrbitRadius(6.0f);
+    
+    objects[1].UpdateOrbitSpeed(0.5f);
+    objects[1].UpdateRotationSpeed(0.5f);
+    objects[1].SetOrbitRadius(4.0f);
+    
+    // Add the moon and set the scale
+    objects[0].AddObjectChild(1);
+    objects[1].SetMoonStatus(true);
+    objects[1].SetScale(glm::vec3(0.6, 0.63, 0.6));
     
     // Set up the shaders
     m_shader = new Shader();
@@ -116,12 +131,23 @@ bool Graphics::Initialize(int width, int height, const std::vector<pair<GLenum, 
 
 void Graphics::Update(unsigned int dt)
 {
-    // Update the object
-    m_cube->Update(dt);
+    int index;
+    
+    // Update the objects
+    for(index = 0; index < objects.size(); index++)
+    {
+        if(!objects[index].IsObjectMoon())
+        {
+            objects[index].Update(dt);
+            objects[index].UpdateMoonData(dt, objects, true);
+        }
+    }
 }
 
 void Graphics::Render()
 {
+    int index;
+    
     //clear the screen
     glClearColor(0.0, 0.0, 0.2, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -133,9 +159,12 @@ void Graphics::Render()
     glUniformMatrix4fv(m_projectionMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetProjection()));
     glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView()));
     
-    // Render the object
-    glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
-    m_cube->Render();
+    // Render the objects
+    for(index = 0; index < objects.size(); index++)
+    {
+        glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(objects[index].GetModel()));
+        objects[index].Render();
+    }
     
     // Get any errors from OpenGL
     auto error = glGetError();
@@ -178,43 +207,70 @@ std::string Graphics::ErrorString(GLenum error)
     }
 }
 
-void Graphics::ToggleRotationDirection()
+void Graphics::ToggleRotationDirection(int object)
 {
-    if(m_cube != NULL)
+    if(object < objects.size())
     {
-        m_cube->ToggleRotationDirection();
+        objects[object].ToggleRotationDirection();
     }
 }
 
-void Graphics::ToggleOrbitDirection()
+void Graphics::ToggleOrbitDirection(int object)
 {
-    if(m_cube != NULL)
+    if(object < objects.size())
     {
-        m_cube->ToggleOrbitDirection();
+       objects[object].ToggleOrbitDirection();
     }
 }
 
-void Graphics::TogglePauseRotation()
+void Graphics::TogglePauseRotation(int object)
 {
-    if(m_cube != NULL)
+    if(object < objects.size())
     {
-        m_cube->TogglePauseRotation();
+        objects[object].TogglePauseRotation();
     }
 }
 
-void Graphics::TogglePauseOrbit()
+void Graphics::TogglePauseOrbit(int object)
 {
-    if(m_cube != NULL)
+    if(object < objects.size())
     {
-        m_cube->TogglePauseOrbit();
+        objects[object].TogglePauseOrbit();
     }
 }
 
-void Graphics::TogglePauseAll()
+void Graphics::TogglePauseAll(int object)
 {
-    if(m_cube != NULL)
+    if(object < objects.size())
     {
-        m_cube->TogglePauseAll();
+        objects[object].TogglePauseAll();
     }
 }
 
+void Graphics::TogglePauseAllObjects()
+{
+    bool allPaused = true;
+    int index;
+    
+    for(index = 0; index < objects.size(); index++)
+    {
+        if(!objects[index].IsPaused())
+        {
+            objects[index].TogglePauseAll();
+            allPaused = false;
+        }
+    }
+    
+    if(!allPaused)
+    {
+        return;
+    }
+    
+    for(index = 0; index < objects.size(); index++)
+    {
+        if(objects[index].IsPaused())
+        {
+            objects[index].TogglePauseAll();
+        }
+    }
+}

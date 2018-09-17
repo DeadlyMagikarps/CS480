@@ -67,6 +67,11 @@ Object::Object()
     rotationSpeedMultiplier = 1.0f;
     orbitSpeedMultiplier = -1.0f;
     
+    // Adding reference to parent object (PA3)
+    origin = glm::mat4(1.0);
+    isMoon = false;
+    myScale = glm::vec3(1.0f, 1.0f, 1.0f);
+    
     glGenBuffers(1, &VB);
     glBindBuffer(GL_ARRAY_BUFFER, VB);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * Vertices.size(), &Vertices[0], GL_STATIC_DRAW);
@@ -94,10 +99,58 @@ void Object::Update(unsigned int dt)
     // The cube will rotate at delta time speed on the y axis while spinning at delta time
     // and translating it's position by a 7 float offset from the origin axis
     model = glm::translate(translate,
-                           glm::vec3(7.0f * cos(orbitAngle), 0.0f,
-                                                7.0f * sin(orbitAngle)))
-                           * glm::rotate(rotation, (angle), rotationAxis);
+                           glm::vec3(7.0f * cos(orbitAngle),
+                                     0.0f,
+                                     7.0f * sin(orbitAngle)))
+                           * glm::rotate(rotation, (angle), rotationAxis) * glm::scale(myScale);
     
+}
+
+void Object::UpdateMoonData(unsigned int dt,
+                    std::vector<Object> &objectsTable,
+                    bool parentOrigin)
+{
+    int index, worldIndex;
+    
+    for(index = 0; index < moonVector.size(); index++)
+    {
+        worldIndex = GetMoonID(index);
+        
+        if((worldIndex >= 0) && (worldIndex < objectsTable.size()))
+        {
+            if(parentOrigin)
+            {
+                objectsTable[worldIndex].SetObjectOrigin(model);
+            }
+            
+            objectsTable[worldIndex].Update(dt);
+            
+            // Call for n amount of moons to set
+            objectsTable[worldIndex].UpdateMoonData(dt, objectsTable, parentOrigin);
+        }
+    }
+}
+
+glm::mat4 Object::GetModel()
+{
+    return model;
+}
+
+void Object::Render()
+{
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, VB);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,color));
+    
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
+    
+    glDrawElements(GL_TRIANGLES, Indices.size(), GL_UNSIGNED_INT, 0);
+    
+    glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(1);
 }
 
 void Object::ToggleRotationDirection()
@@ -171,25 +224,69 @@ float Object::GetRotationSpeed()
     return rotationSpeed;
 }
 
-glm::mat4 Object::GetModel()
+void Object::SetOrbitRadius(float radius)
 {
-    return model;
+    orbitRadius = radius;
 }
 
-void Object::Render()
+void Object::SetObjectOrigin(const glm::mat4 &newOrigin)
 {
-    glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
+    origin = newOrigin;
+}
+
+void Object::AddObjectChild(int worldMoonID)
+{
+    moonVector.push_back(worldMoonID);
+}
+
+int Object::GetMoonID(int localMoonID)
+{
+    if((localMoonID >= 0) && (localMoonID < moonVector.size()))
+    {
+        return moonVector[localMoonID];
+    }
     
-    glBindBuffer(GL_ARRAY_BUFFER, VB);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,color));
-    
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
-    
-    glDrawElements(GL_TRIANGLES, Indices.size(), GL_UNSIGNED_INT, 0);
-    
-    glDisableVertexAttribArray(0);
-    glDisableVertexAttribArray(1);
+    return -1; // error
+}
+
+int Object::GetNumberOfMoons()
+{
+    return moonVector.size();
+}
+
+void Object::SetMoonStatus(bool flag)
+{
+    isMoon = flag;
+}
+
+bool Object::IsObjectMoon()
+{
+    return isMoon;
+}
+
+void Object::SetScale(const glm::vec3 &scale)
+{
+    myScale = scale;
+}
+
+glm::vec3 Object::GetScale()
+{
+    return myScale;
+}
+
+void Object::UpdateOrbitSpeed(float orbSpeed)
+{
+    orbitSpeed = orbSpeed;
+}
+
+void Object::UpdateRotationSpeed(float rotSpeed)
+{
+    rotationSpeed = rotSpeed;
+}
+
+bool Object::IsPaused()
+{
+    return ((rotationSpeedMultiplier == 0.0)
+            && orbitSpeedMultiplier == 0.0);
 }
 

@@ -110,49 +110,104 @@ void Engine::Keyboard()
             m_running = false;
         }
         
-        // Toggle Rotation Direction
-        else if(m_event.key.keysym.sym == SDLK_r)
+        // Handling Parent Objects Transformations //
+        // Toggle Parent Rotation Direction
+        else if(m_event.key.keysym.sym == SDLK_a)
         {
             if(m_graphics != NULL)
             {
-                m_graphics->ToggleRotationDirection();
+                m_graphics->ToggleRotationDirection(0);
             }
         }
         
-        // Toggle Orbit Direction
-        else if(m_event.key.keysym.sym == SDLK_o)
+        // Toggle Parent Orbit Direction
+        else if(m_event.key.keysym.sym == SDLK_d)
         {
             if(m_graphics != NULL)
             {
-                m_graphics->ToggleOrbitDirection();
+                m_graphics->ToggleOrbitDirection(0);
             }
         }
         
-        // Pause Rotation
+        // Pause Parent Rotation
         else if(m_event.key.keysym.sym == SDLK_w)
         {
             if(m_graphics != NULL)
             {
-                m_graphics->TogglePauseRotation();
+                m_graphics->TogglePauseRotation(0);
             }
         }
         
-        // Pause Orbit
+        // Pause Parent Orbit
         else if(m_event.key.keysym.sym == SDLK_s)
         {
             if(m_graphics != NULL)
             {
-                m_graphics->TogglePauseOrbit();
+                m_graphics->TogglePauseOrbit(0);
             }
         }
         
-        // Pause All
-        else if(m_event.key.keysym.sym == SDLK_SPACE ||
-                m_event.key.keysym.sym == SDLK_p)
+        // Toggle Parent Pause
+        else if(m_event.key.keysym.sym == SDLK_q)
         {
             if(m_graphics != NULL)
             {
-                m_graphics->TogglePauseAll();
+                m_graphics->TogglePauseAll(0);
+            }
+        }
+        
+        // Handling Child Objects Transformations //
+        // Toggle Moon Rotation
+        else if(m_event.key.keysym.sym == SDLK_j)
+        {
+            if(m_graphics != NULL)
+            {
+                m_graphics->ToggleRotationDirection(1);
+            }
+        }
+        
+        // Toggle Moon Orbit Direction
+        else if(m_event.key.keysym.sym == SDLK_l)
+        {
+            if(m_graphics != NULL)
+            {
+                m_graphics->ToggleOrbitDirection(1);
+            }
+        }
+        
+        // Toggle Moon Pause Rotation
+        else if(m_event.key.keysym.sym == SDLK_i)
+        {
+            if(m_graphics != NULL)
+            {
+                m_graphics->TogglePauseRotation(1);
+            }
+        }
+        
+        // Toggle Moon Pause Orbit
+        else if(m_event.key.keysym.sym == SDLK_k)
+        {
+            if(m_graphics != NULL)
+            {
+                m_graphics->TogglePauseOrbit(1);
+            }
+        }
+        
+        // Toggle Moon Pause
+        else if(m_event.key.keysym.sym == SDLK_p)
+        {
+            if(m_graphics != NULL)
+            {
+                m_graphics->TogglePauseAll(1);
+            }
+        }
+        
+        // Pause All objects
+        else if(m_event.key.keysym.sym == SDLK_SPACE)
+        {
+            if(m_graphics != NULL)
+            {
+                m_graphics->TogglePauseAllObjects();
             }
         }
     }
@@ -166,7 +221,7 @@ void Engine::Mouse()
         {
             if(m_graphics != NULL)
             {
-                m_graphics->ToggleOrbitDirection();
+                m_graphics->ToggleOrbitDirection(0);
             }
         }
         
@@ -174,7 +229,7 @@ void Engine::Mouse()
         {
             if(m_graphics != NULL)
             {
-                m_graphics->ToggleRotationDirection();
+                m_graphics->ToggleRotationDirection(0);
             }
         }
         
@@ -182,7 +237,7 @@ void Engine::Mouse()
         {
             if(m_graphics != NULL)
             {
-                m_graphics->TogglePauseAll();
+                m_graphics->TogglePauseAll(0);
             }
         }
         
@@ -190,7 +245,7 @@ void Engine::Mouse()
         {
             if(m_graphics != NULL)
             {
-                m_graphics->TogglePauseRotation();
+                m_graphics->TogglePauseRotation(0);
             }
         }
         
@@ -198,7 +253,7 @@ void Engine::Mouse()
         {
             if(m_graphics != NULL)
             {
-                m_graphics->TogglePauseOrbit();
+                m_graphics->TogglePauseOrbit(0);
             }
         }
     }
