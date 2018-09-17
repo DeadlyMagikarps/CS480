@@ -1,4 +1,4 @@
-# PA1: Spinning Cube
+# PA3: Moons
 
 # Dependencies, Building, and Running
 
@@ -72,17 +72,23 @@ Usage
 Controls for this program will be using the SDL Library with Keyboard and Mouse.
 See usage as described below.
 
+## Keyboard Usage
 
-### Keyboard Usage
-* Pause All Rotation and Orbits - Space Bar.
+### Universal Usage
+* Pause All Rotation and Orbits - Space Bar
+* Quit Program - Escape Key
 
-* Toggle Rotation Direction - r.
-* Toggle Orbit Direction - o.
+#### Toggling Parent Objects Transformations
+* Toggle Rotation Direction - a
+* Toggle Orbit Direction - d
+* Toggle Pause Rotation - w
+* Toggle Pause Orbit - s
 
-* Toggle Pause Rotation - w.
-* Toggle Pause Orbit - s.
-
-* Quit Program - Escape Key.
+#### Toggling Child Objects Transformations
+* Toggle Rotation Direction - j
+* Toggle Orbit Direction - l
+* Toggle Pause Rotation - i
+* Toggle Pause Orbit - k
 
 ### Mouse Usage
 * Pause All Rotation and Orbits - Middle Mouse Button (MMB).
