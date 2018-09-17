@@ -19,12 +19,16 @@ class Graphics
     void Update(unsigned int dt);
     void Render();
     
-    // PA2 Keyboard Input Funtionality
-    void ToggleRotationDirection();
-    void ToggleOrbitDirection();
-    void TogglePauseRotation();
-    void TogglePauseOrbit();
-    void TogglePauseAll();
+    // PA2 Keyboard Input Funtionality + PA3 Modfications
+    void ToggleRotationDirection(int object);
+    void ToggleOrbitDirection(int object);
+    void TogglePauseRotation(int object);
+    void TogglePauseOrbit(int object);
+    void TogglePauseAll(int object);
+    void TogglePauseAllObjects();
+    
+    bool UpdateRotation(int object, float speed);
+    bool UpdateOrbit(int object, float speed);
 
   private:
     std::string ErrorString(GLenum error);
@@ -36,7 +40,8 @@ class Graphics
     GLint m_viewMatrix;
     GLint m_modelMatrix;
 
-    Object *m_cube;
+    std::vector<Object> objects;
+    
 };
 
 #endif /* GRAPHICS_H */
