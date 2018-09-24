@@ -25,7 +25,7 @@ Engine::~Engine()
     m_graphics = NULL;
 }
 
-bool Engine::Initialize(const vector<pair<GLenum, string>>& shaderVector)
+bool Engine::Initialize(const vector<pair<GLenum, string>>& shaderVector, const string &path)
 {
     // Start a window
     m_window = new Window();
@@ -37,7 +37,7 @@ bool Engine::Initialize(const vector<pair<GLenum, string>>& shaderVector)
     
     // Start the graphics
     m_graphics = new Graphics();
-    if(!m_graphics->Initialize(m_WINDOW_WIDTH, m_WINDOW_HEIGHT, shaderVector))
+    if(!m_graphics->Initialize(m_WINDOW_WIDTH, m_WINDOW_HEIGHT, shaderVector, path))
     {
         printf("The graphics failed to initialize.\n");
         return false;
@@ -63,7 +63,6 @@ void Engine::Run()
         while(SDL_PollEvent(&m_event) != 0)
         {
             Keyboard();
-            Mouse();
         }
         
         // Update and render the graphics
@@ -88,153 +87,6 @@ void Engine::Keyboard()
         if (m_event.key.keysym.sym == SDLK_ESCAPE)
         {
             m_running = false;
-        }
-        
-        // Handling Parent Objects Transformations //
-        // Toggle Parent Rotation Direction
-        else if(m_event.key.keysym.sym == SDLK_a)
-        {
-            if(m_graphics != NULL)
-            {
-                m_graphics->ToggleRotationDirection(0);
-            }
-        }
-        
-        // Toggle Parent Orbit Direction
-        else if(m_event.key.keysym.sym == SDLK_d)
-        {
-            if(m_graphics != NULL)
-            {
-                m_graphics->ToggleOrbitDirection(0);
-            }
-        }
-        
-        // Pause Parent Rotation
-        else if(m_event.key.keysym.sym == SDLK_w)
-        {
-            if(m_graphics != NULL)
-            {
-                m_graphics->TogglePauseRotation(0);
-            }
-        }
-        
-        // Pause Parent Orbit
-        else if(m_event.key.keysym.sym == SDLK_s)
-        {
-            if(m_graphics != NULL)
-            {
-                m_graphics->TogglePauseOrbit(0);
-            }
-        }
-        
-        // Toggle Parent Pause
-        else if(m_event.key.keysym.sym == SDLK_q)
-        {
-            if(m_graphics != NULL)
-            {
-                m_graphics->TogglePauseAll(0);
-            }
-        }
-        
-        // Handling Child Objects Transformations //
-        // Toggle Moon Rotation
-        else if(m_event.key.keysym.sym == SDLK_j)
-        {
-            if(m_graphics != NULL)
-            {
-                m_graphics->ToggleRotationDirection(1);
-            }
-        }
-        
-        // Toggle Moon Orbit Direction
-        else if(m_event.key.keysym.sym == SDLK_l)
-        {
-            if(m_graphics != NULL)
-            {
-                m_graphics->ToggleOrbitDirection(1);
-            }
-        }
-        
-        // Toggle Moon Pause Rotation
-        else if(m_event.key.keysym.sym == SDLK_i)
-        {
-            if(m_graphics != NULL)
-            {
-                m_graphics->TogglePauseRotation(1);
-            }
-        }
-        
-        // Toggle Moon Pause Orbit
-        else if(m_event.key.keysym.sym == SDLK_k)
-        {
-            if(m_graphics != NULL)
-            {
-                m_graphics->TogglePauseOrbit(1);
-            }
-        }
-        
-        // Toggle Moon Pause
-        else if(m_event.key.keysym.sym == SDLK_p)
-        {
-            if(m_graphics != NULL)
-            {
-                m_graphics->TogglePauseAll(1);
-            }
-        }
-        
-        // Pause All objects
-        else if(m_event.key.keysym.sym == SDLK_SPACE)
-        {
-            if(m_graphics != NULL)
-            {
-                m_graphics->TogglePauseAllObjects();
-            }
-        }
-    }
-}
-
-void Engine::Mouse()
-{
-    if(m_event.type == SDL_MOUSEBUTTONDOWN)
-    {
-        if(SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_LEFT))
-        {
-            if(m_graphics != NULL)
-            {
-                m_graphics->ToggleOrbitDirection(0);
-            }
-        }
-        
-        else if(SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_RIGHT))
-        {
-            if(m_graphics != NULL)
-            {
-                m_graphics->ToggleRotationDirection(0);
-            }
-        }
-        
-        else if(SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_MIDDLE))
-        {
-            if(m_graphics != NULL)
-            {
-                m_graphics->TogglePauseAll(0);
-            }
-        }
-        
-        else if(SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_X1))
-        {
-            if(m_graphics != NULL)
-            {
-                m_graphics->TogglePauseRotation(0);
-            }
-        }
-        
-        else if(SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(SDL_BUTTON_X2))
-        {
-            if(m_graphics != NULL)
-            {
-                m_graphics->TogglePauseOrbit(0);
-            }
         }
     }
 }

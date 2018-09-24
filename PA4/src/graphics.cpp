@@ -10,7 +10,7 @@ Graphics::~Graphics()
     
 }
 
-bool Graphics::Initialize(int width, int height, const std::vector<pair<GLenum, std::string>>& shaderInfo)
+bool Graphics::Initialize(int width, int height, const std::vector<pair<GLenum, std::string>>& shaderInfo, const std::string &path)
 {
     // Used for the linux OS
 #if !defined(__APPLE__) && !defined(MACOSX)
@@ -46,23 +46,9 @@ bool Graphics::Initialize(int width, int height, const std::vector<pair<GLenum, 
         return false;
     }
     
-    // Create the object (2 for this one)
-    objects.push_back(Object());
-    objects.push_back(Object());
-    
-    // Initialize default speeds of these objects
-    objects[0].UpdateOrbitSpeed(0.4f);
-    objects[0].UpdateRotationSpeed(1.0f);
-    objects[0].SetOrbitRadius(6.0f);
-    
-    objects[1].UpdateOrbitSpeed(0.5f);
-    objects[1].UpdateRotationSpeed(0.5f);
-    objects[1].SetOrbitRadius(4.0f);
-    
-    // Add the moon and set the scale
-    objects[0].AddObjectChild(1);
-    objects[1].SetMoonStatus(true);
-    objects[1].SetScale(glm::vec3(0.6, 0.63, 0.6));
+    // Create the object
+    m_cube = new Object(path);
+    printf("Creating object from %s...\n", path.c_str());
     
     // Set up the shaders
     m_shader = new Shader();
@@ -134,14 +120,7 @@ void Graphics::Update(unsigned int dt)
     int index;
     
     // Update the objects
-    for(index = 0; index < objects.size(); index++)
-    {
-        if(!objects[index].IsObjectMoon())
-        {
-            objects[index].Update(dt);
-            objects[index].UpdateMoonData(dt, objects, true);
-        }
-    }
+    m_cube->Update(dt);
 }
 
 void Graphics::Render()
@@ -160,11 +139,7 @@ void Graphics::Render()
     glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView()));
     
     // Render the objects
-    for(index = 0; index < objects.size(); index++)
-    {
-        glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(objects[index].GetModel()));
-        objects[index].Render();
-    }
+    m_cube->Render();
     
     // Get any errors from OpenGL
     auto error = glGetError();
@@ -204,73 +179,5 @@ std::string Graphics::ErrorString(GLenum error)
     else
     {
         return "None";
-    }
-}
-
-void Graphics::ToggleRotationDirection(int object)
-{
-    if(object < objects.size())
-    {
-        objects[object].ToggleRotationDirection();
-    }
-}
-
-void Graphics::ToggleOrbitDirection(int object)
-{
-    if(object < objects.size())
-    {
-       objects[object].ToggleOrbitDirection();
-    }
-}
-
-void Graphics::TogglePauseRotation(int object)
-{
-    if(object < objects.size())
-    {
-        objects[object].TogglePauseRotation();
-    }
-}
-
-void Graphics::TogglePauseOrbit(int object)
-{
-    if(object < objects.size())
-    {
-        objects[object].TogglePauseOrbit();
-    }
-}
-
-void Graphics::TogglePauseAll(int object)
-{
-    if(object < objects.size())
-    {
-        objects[object].TogglePauseAll();
-    }
-}
-
-void Graphics::TogglePauseAllObjects()
-{
-    bool allPaused = true;
-    int index;
-    
-    for(index = 0; index < objects.size(); index++)
-    {
-        if(!objects[index].IsPaused())
-        {
-            objects[index].TogglePauseAll();
-            allPaused = false;
-        }
-    }
-    
-    if(!allPaused)
-    {
-        return;
-    }
-    
-    for(index = 0; index < objects.size(); index++)
-    {
-        if(objects[index].IsPaused())
-        {
-            objects[index].TogglePauseAll();
-        }
     }
 }

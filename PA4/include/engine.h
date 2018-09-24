@@ -14,10 +14,9 @@ class Engine
     Engine(string name, int width, int height);
     Engine(string name);
     ~Engine();
-    bool Initialize(const vector<pair<GLenum, string>> &shaderVector);
+    bool Initialize(const vector<pair<GLenum, string>> &shaderVector, const string &path);
     void Run();
     void Keyboard();
-    void Mouse();
     unsigned int getDT();
     long long GetCurrentTimeMillis();
   
