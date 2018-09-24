@@ -117,16 +117,12 @@ bool Graphics::Initialize(int width, int height, const std::vector<pair<GLenum, 
 
 void Graphics::Update(unsigned int dt)
 {
-    int index;
-    
     // Update the objects
     m_cube->Update(dt);
 }
 
 void Graphics::Render()
 {
-    int index;
-    
     //clear the screen
     glClearColor(0.0, 0.0, 0.2, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -139,6 +135,7 @@ void Graphics::Render()
     glUniformMatrix4fv(m_viewMatrix, 1, GL_FALSE, glm::value_ptr(m_camera->GetView()));
     
     // Render the objects
+    glUniformMatrix4fv(m_modelMatrix, 1, GL_FALSE, glm::value_ptr(m_cube->GetModel()));
     m_cube->Render();
     
     // Get any errors from OpenGL

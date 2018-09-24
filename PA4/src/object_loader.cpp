@@ -11,14 +11,13 @@
 
 void LoadOBJ(const std::string &path)
 {
-    Object o;
+    Object o(path);
     
     printf("Loading OBJ file %s...\n", path.c_str());
     
     // Open file
     FILE * fin = fopen(path.c_str(), "r");
     std::cerr << "File Opened: " << path.c_str() << std::endl;
-    std::cerr << fin;
     
     if(fin == NULL)
     {
@@ -53,6 +52,7 @@ void LoadOBJ(const std::string &path)
             
             // Push the vertices
             o.SetVerticies(*temp);
+            printf("Vertices: %f...\n", *temp);
         }
         
         else if(strcmp(head, "f") == 0)
