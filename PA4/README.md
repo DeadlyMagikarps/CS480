@@ -54,8 +54,8 @@ make
 To run this program, provide the location of the shaders of -v and -f
 
 -v Specifies file path for the Vertex Shader.  
--f Specifies file path for the Fragment Shader. 
--m Specifies fil path for the obj file. 
+-f Specifies file path for the Fragment Shader.  
+-m Specifies file path for the obj file. 
 
 Failure to provide all three file paths will result in program termination.
 
