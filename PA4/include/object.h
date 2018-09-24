@@ -8,7 +8,6 @@
 class Object
 {
   public:
-    Object();
     Object(const std::string &path);
     ~Object();
     void Update(unsigned int dt);
@@ -19,6 +18,7 @@ class Object
     std::vector<unsigned int> GetIndicies();
     void SetVerticies(Vertex v);
     void SetIndices(unsigned int i);
+    void LoadOBJ(const std::string &path);
     
     glm::mat4 GetModel();
 
