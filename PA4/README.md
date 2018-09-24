@@ -1,4 +1,4 @@
-# PA3: Moons
+# PA4: Model Loading
 
 # Dependencies, Building, and Running
 
@@ -60,42 +60,20 @@ OpenGL 3.3 will run on the [ubuntu.cse.unr.edu](https://ubuntu.cse.unr.edu/) web
 To run this program, provide the location of the shaders of -v and -f
 
 -v Specifies file path for the Vertex Shader.  
--f Specifies file path for the Fragment Shader.
+-f Specifies file path for the Fragment Shader. 
+-m Specifies fil path for the obj file. 
 
-Failure to provide both file paths will result in program termination.
+Failure to provide all three file paths will result in program termination.
 
 Usage
 ```bash
 ./Tutorial -v shaders/cubeVertexShader.glsl -f shaders/cubeFragmentShader.glsl
 ```
 ### Overall Controls
-Controls for this program will be using the SDL Library with Keyboard and Mouse.
+Controls for this program will be using the SDL Library with Keyboard.
 See usage as described below.
 
 ## Keyboard Usage
 
 ### Universal Usage
-* Pause All Rotation and Orbits - Space Bar
 * Quit Program - Escape Key
-
-#### Toggling Parent Objects Transformations
-* Toggle Rotation Direction - a
-* Toggle Orbit Direction - d
-* Toggle Pause Rotation - w
-* Toggle Pause Orbit - s
-
-#### Toggling Child Objects Transformations
-* Toggle Rotation Direction - j
-* Toggle Orbit Direction - l
-* Toggle Pause Rotation - i
-* Toggle Pause Orbit - k
-
-### Mouse Usage
-* Pause All Rotation and Orbits - Middle Mouse Button (MMB).
-
-* Toggle Rotation Direction - Right Mouse Button (RMB).
-* Toggle Orbit Direction - Left Mouse Button (LMB).
-
-#### For usage with mouses that has more than 3 Buttons
-* Toggle Pause Rotation - X1 Mouse Button
-* Toggle Pause Orbit - X2 Mouse Button
