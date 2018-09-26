@@ -105,7 +105,6 @@ void Object::LoadOBJ(const std::string &path)
             glm::vec3 color;
             
             fscanf(fin, "%f %f %f \n", &vertex.x, &vertex.y, &vertex.z);
-            printf("Vertices: %f %f %f\n", vertex.x, vertex.y, vertex.z);
             
             color.x = (float)(rand() % 2);
             color.y = (float)(rand() % 2);
@@ -115,13 +114,25 @@ void Object::LoadOBJ(const std::string &path)
             
             // Push the vertices
             Vertices.push_back(*temp);
+            //std::cerr << temp->vertex.x;
         }
         
         else if(strcmp(head, "f") == 0)
         {
             unsigned int firstVal[3], secondVal[3];
             
-            fscanf(fin, "%i//%i %i//%i %i//%i\n", &firstVal[0], &secondVal[0], &firstVal[1], &secondVal[1], &firstVal[2], &secondVal[2]);
+            // Since all the .obj files are different, the way you read them in has to be modified.
+            // This way assumes integers with just a space. Uncomment and comment the ones needed to
+            // accustom different file formats from the .obj file.
+            fscanf(fin, "%i %i %i %i %i %i\n", &firstVal[0], &secondVal[1], &firstVal[1], &secondVal[1], &firstVal[2], &secondVal[2]);
+            
+            // Use this one for my DisBoard.obj
+            //fscanf(fin, "%i/%i/%i %i/%i/%i\n", &firstVal[0], &secondVal[1], &firstVal[1], &secondVal[1], &firstVal[2], &secondVal[2]);
+            
+            // Some files has two slashs between the faces. Uncomment if needed
+            //fscanf(fin, "%i//%i//%i %i//%i//%i\n", &firstVal[0], &secondVal[1], &firstVal[1], &secondVal[1], &firstVal[2], &secondVal[2]);
+            
+            //std::cerr << firstVal[0] << firstVal[1] << firstVal[2] << std::endl;
             
             // Push the indicies
             Indices.push_back(firstVal[0]);
