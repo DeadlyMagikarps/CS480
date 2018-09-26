@@ -7,17 +7,6 @@ For both of the operating systems to run this project installation of these thre
 
 This project uses OpenGL 3.3. Some computers, such as virtual machines in the ECC, can not run this version. In in order to run OpenGL 2.7 follow the instructions at [Using OpenGL 2.7](https://github.com/HPC-Vis/computer-graphics/wiki/Using-OpenGL-2.7)
 
-### Ubuntu/Linux
-```bash
-sudo apt-get install libglew-dev libglm-dev libsdl2-dev
-```
-
-### Mac OSX
-Installation of brew is suggested to easily install the libs. Ensure that the latest version of the Developer Tools is installed.
-```bash
-brew install glew glm sdl2
-```
-
 ## Building and Running
 To build this project there are two options. One is to use CMake which makes including new libraries easier, and handles new files added automatically to the src and include directory. CMake is a small new learning curve but makes things easier in the future.
 The second option is to use the provided Makefile which is used as usual.
@@ -35,7 +24,7 @@ mkdir build
 cd build
 cmake ..
 make
-./Tutorial
+./Tutorial -v shaders/cubeVertexShader.glsl -f shaders/cubeFragmentShader.glsl -m model/[Object].obj
 ```
 
 ### Makefile Instructions 
@@ -48,6 +37,9 @@ cp ../makefile .
 make
 ./Tutorial -v shaders/cubeVertexShader.glsl -f shaders/cubeFragmentShader.glsl -m model/[Object].obj
 ```
+### Running different .obj File Formats
+
+Some .obj files for their faces has a single white space, a "/" or "//" slashes. To accomadate for that for this project, you have to go into the object.cpp file, go to near line 127 and uncomment or comment out the fscanf calls. Only 1 fscanf should be called. For the dragon.obj, use the default call on line 127. For my particular board, uncomment line 130 and comment out line 127. This is all the modifications you will need.
 
 ### Running Program with Command Line Arguments
 
