@@ -25,7 +25,7 @@ mkdir build
 cd build
 cmake ..
 make
-./Tutorial -v shaders/cubeVertexShader.glsl -f shaders/cubeFragmentShader.glsl -m model/[Object].obj
+./Tutorial -v shaders/cubeVertexShader.glsl -f shaders/cubeFragmentShader.glsl -m models/[Object].obj
 ```
 
 ### Makefile Instructions 
