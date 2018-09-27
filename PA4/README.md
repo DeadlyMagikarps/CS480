@@ -25,7 +25,7 @@ mkdir build
 cd build
 cmake ..
 make
-./Tutorial -v shaders/cubeVertexShader.glsl -f shaders/cubeFragmentShader.glsl -m model/[Object].obj
+./Tutorial -v shaders/cubeVertexShader.glsl -f shaders/cubeFragmentShader.glsl -m models/[Object].obj
 ```
 
 ### Makefile Instructions 
@@ -54,7 +54,7 @@ Failure to provide all three file paths will result in program termination.
 
 Usage
 ```bash
-./Tutorial -v shaders/cubeVertexShader.glsl -f shaders/cubeFragmentShader.glsl -m model/[Object].obj
+./Tutorial -v shaders/cubeVertexShader.glsl -f shaders/cubeFragmentShader.glsl -m models/[Object].obj
 ```
 ### Overall Controls
 Controls for this program will be using the SDL Library with Keyboard.
